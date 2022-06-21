@@ -2,6 +2,7 @@ const { query } = require('express');
 const express = require('express');
 const router  = express.Router();
 var authen = require('../models/authenticate');
+var getTable = require('../models/tabledisplay');
 
 //login page
 router.get('/', (req,res)=>{
@@ -12,9 +13,12 @@ router.post('/', async function(req, res, next) {
    var auth = await authen(req.body.username, req.body.password);
    console.log("Check " + auth);
     if (auth==true) {
-       res.render('users', {
+        var tableString = await getTable(req.body.username);
+        // console.table(tableString.fields)
+        res.render('users', {
         title: "User page",
-        message: "Welcome to ATN"
+        message: "Welcome to ATN\n",
+        table: tableString
        })
         }
     else {
