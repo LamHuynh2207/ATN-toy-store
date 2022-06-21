@@ -24,8 +24,9 @@ async function getTable(user)
     }
     for(let rowIndex in dataTable){
         var bodyTable = "<tr>"
-        for(let fieldIndex in dataTable[rowIndex]){
-            var cell = "<td>"+dataTable[rowIndex][fieldIndex]+"</td>"
+        rowData = dataTable[rowIndex]
+        for(let fieldIndex in rowData){
+            var cell = "<td>"+rowData[fieldIndex]+"</td>"
             bodyTable+=cell
         }
         bodyTable+="</tr>"
