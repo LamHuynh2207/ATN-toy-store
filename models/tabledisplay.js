@@ -46,12 +46,12 @@ async function getTable(user)
         bodyTable+="</tr>"
         stringTable+=bodyTable
     }
-    stringTable += "<tr>"
+    stringTable += `<tr><form method='POST' action='/users/add${get_query}'>`
     for(let headerIndex in headerData){
-        stringTable += "<td> </td>";
+        stringTable += `<td><input type='text' name=${headerData[headerIndex]} ></td>`;
     }
-    stringTable += "<td> <a href='/add'> Add </a> </td>"
-    stringTable += "</tr>"
+    stringTable += "<td> <button type='submit'> Add </button></td>"
+    stringTable += "</form></tr>"
     stringTable+="</table>"
     console.log(stringTable)
     return stringTable;

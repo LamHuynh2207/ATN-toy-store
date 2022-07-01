@@ -5,6 +5,9 @@ var getTable = require('../models/tabledisplay');
 const { query } = require('express');
 const url = require('url')
 const deleteAction = require('../models/DeleteFunction')
+const addFunction = require('../models/AddFunction')
+
+
 
 router.get('/',(req,res)=>{
     res.send('respond with a resource');
@@ -28,11 +31,24 @@ router.post('/', async function(req, res, next) {
      }
  });
 
+ router.post('/add', async function(req, res, next) {
+    console.log(req.body)
+    const queryObject = url.parse(req.url, true).query;
+    var user = queryObject['user']
+    await addFunction(req.body)
+    var tableString = await getTable(user);
+    res.render('users', {
+        title: "User page",
+        message: "Welcome to ATN\n",
+        table: tableString
+       })
+
+ });
+
  router.get('/delete',async (req,res,next)=>{
     const queryObject = url.parse(req.url, true).query;
     var id = parseInt(queryObject['id'])
     var user = queryObject['user']
-    await deleteAction(id)
     var tableString = await getTable(user);
     res.render('users', {
         title: "User page",
