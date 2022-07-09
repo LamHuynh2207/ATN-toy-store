@@ -21,8 +21,8 @@ router.post('/', async function(req, res, next) {
          var tableString = await getTable(req.body.username);
          // console.table(tableString.fields)
          res.render('users', {
-         title: "User page",
-         message: "Welcome to ATN\n",
+         title: "List of products",
+         message: "Welcome to ATN shop\n",
          table: tableString
         })
          }
@@ -38,8 +38,8 @@ router.post('/', async function(req, res, next) {
     await addFunction(req.body)
     var tableString = await getTable(user);
     res.render('users', {
-        title: "User page",
-        message: "Welcome to ATN\n",
+        title: "List of products",
+        message: "Welcome to ATN shop\n",
         table: tableString
        })
 
@@ -51,8 +51,8 @@ router.post('/', async function(req, res, next) {
     var user = queryObject['user']
     var tableString = await getTable(user);
     res.render('users', {
-        title: "User page",
-        message: "Welcome to ATN\n",
+        title: "List of products",
+        message: "Welcome to ATN shop\n",
         table: tableString
        })
 })
