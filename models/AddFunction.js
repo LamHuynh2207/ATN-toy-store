@@ -27,4 +27,4 @@ async function addFunction(body)
     console.log(add_query)
     var query_data = await pg_conn.query(add_query);
 }
-module.exports = addFunction
+module.exports = addFunction;

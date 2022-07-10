@@ -9,6 +9,8 @@ router.get('/', (req,res)=>{
     res.render('login', { message:"Please input your credential!"});
 })
 
+module.exports = router; 
+
 // router.post('/', async function(req, res, next) {
 //    var auth = await authen(req.body.username, req.body.password);
 //    console.log("Check " + auth);
@@ -30,5 +32,3 @@ router.get('/', (req,res)=>{
    
 
 
-
-module.exports = router; 
