@@ -26,24 +26,27 @@ async function getTable(user)
     }
     query_data = await pg_conn.query(table_query);
     var dataTable = query_data.rows
+    console.log
     var stringTable = "<table><tr>"
     var headerData = Object.keys(dataTable[0])
     for(let headerIndex in headerData){
         var header = "<th>"+headerData[headerIndex]+"</th>"
         stringTable+=header
     }
-    stringTable += "<th> CRUD </th>"; 
+    stringTable += `<tr><form method='POST' action='/users/edit${get_query}'>`
     for(let rowIndex in dataTable){
-        var bodyTable = "<tr>"
         rowData = dataTable[rowIndex]
         id_product = rowData[Object.keys(rowData)[0]]
-        for(let fieldIndex in rowData){
-            var cell = "<td>"+rowData[fieldIndex]+"</td>"
-            bodyTable+=cell
-        }
         var get_query = "?id=" + id_product + "&user="+ user 
-        bodyTable += `<td> <a href='/users/edit${get_query}'> Edit/ </a> <a href='/users/delete${get_query}'> Delete </a> </td>`
-        bodyTable+="</tr>"
+        var bodyTable = `<tr> <form method='POST' action=/users/edit${get_query}>`
+        for(let fieldName in rowData){
+            var cell = `<td><input type='text' placeholder='${rowData[fieldName]}' name='${fieldName}'></input></td>`
+            bodyTable+=cell
+            console.log(rowData)
+            console.log(fieldName)
+        }
+        bodyTable += `<td>  <button type='submit'> Edit </button><a href='/users/delete${get_query}'> Delete </a> </td>`
+        bodyTable+="</form></tr>"
         stringTable+=bodyTable
     }
     stringTable += `<tr><form method='POST' action='/users/add${get_query}'>`
@@ -53,7 +56,6 @@ async function getTable(user)
     stringTable += "<td> <button type='submit'> Add </button></td>"
     stringTable += "</form></tr>"
     stringTable+="</table>"
-    console.log(stringTable)
     return stringTable;
 }
 
