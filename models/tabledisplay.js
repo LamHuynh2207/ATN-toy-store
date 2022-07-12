@@ -40,7 +40,7 @@ async function getTable(user)
         var get_query = "?id=" + id_product + "&user="+ user 
         var bodyTable = `<tr> <form method='POST' action=/users/edit${get_query}>`
         for(let fieldName in rowData){
-            var cell = `<td><input type='text' placeholder='${rowData[fieldName]}' name='${fieldName}'></input></td>`
+            var cell = `<td><input type='text' value = '${rowData[fieldName]}' placeholder='${rowData[fieldName]}' name='${fieldName}'></input></td>`
             bodyTable+=cell
             console.log(rowData)
             console.log(fieldName)
